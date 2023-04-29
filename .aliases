@@ -1,0 +1,4 @@
+# Git
+
+alias gl="git log --pretty=oneline"
+alias gb="git branch --show-current"
