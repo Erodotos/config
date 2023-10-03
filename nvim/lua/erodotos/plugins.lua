@@ -8,26 +8,64 @@
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
+	-- Packer can manage itself
+	use 'wbthomason/packer.nvim'
 
-  -- Autoclose brackets
-  use 'rstacruz/vim-closer'
+	-- vim-closer
+	use 'rstacruz/vim-closer'
 
-  -- A fuzzy file finder
-  use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.3',
-    requires = { 
-      {'nvim-lua/plenary.nvim'}, 
-      {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' } 
-    }
-  }
+	-- telescope
+	use {
+		'nvim-telescope/telescope.nvim', tag = '0.1.3',
+		requires = { 
+			{'nvim-lua/plenary.nvim'}, 
+			{'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' } 
+		}
+	}
 
-  -- Syntax Highlighting
-  use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
-  use('nvim-treesitter/playground')
+	-- treesitter
+	use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+	use('nvim-treesitter/playground')
 
-  -- File Explorer
-  use ('nvim-tree/nvim-web-devicons')
-  use ('nvim-tree/nvim-tree.lua')
+	-- nvim-tree
+	use {
+		'nvim-tree/nvim-tree.lua',
+		requires = {
+			{'nvim-tree/nvim-web-devicons'},
+		}
+	}
+
+	-- undotree
+	use('mbbill/undotree')
+
+	-- fugitive (git wrapper)
+	use('tpope/vim-fugitive')
+	
+
+	
+	-- bufferline
+	use{
+		'akinsho/bufferline.nvim',
+		tag = "*",
+		requires = 'nvim-tree/nvim-web-devicons'
+	}
+
+	-- lualine
+	use {
+		'nvim-lualine/lualine.nvim',
+		requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+	}
+
+	-- toggleterm
+	use {
+		"akinsho/toggleterm.nvim",
+		tag = '*',
+		config = function()
+			require("toggleterm").setup()
+		end
+	}
+
+	-- autopair
+	use('jiangmiao/auto-pairs')
+
 end)
